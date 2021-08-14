@@ -22,11 +22,9 @@
 static __u8 *advantage2_report_fixup(struct hid_device *hdev, __u8 *rdesc,
 		unsigned int *rsize)
 {
-	printk(KERN_ALERT "id %x %x %x %x %x\n", hdev->bus, hdev->group, hdev->vendor, hdev->product, hdev->version);
-	printk(KERN_ALERT "%64ph\n", rdesc);
-	if (rdesc[0]==0x05 && rdesc[1] == 0x01 && rdesc[2] == 0x09 && rdesc[3] == 0x06) {
+	if (*rsize == 0x41 && rdesc[0]==0x05 && rdesc[1] == 0x01 && rdesc[2] == 0x09 && rdesc[3] == 0x06) {
+		hid_info(hdev, "Fixing up Kinesis Advantage2 report descriptor %x\n", rdesc[0x35]);
 		rdesc[0x35] = 0xFF;
-		printk(KERN_ALERT "%64ph\n", rdesc);
 	}
 	return rdesc;
 }
