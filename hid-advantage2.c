@@ -19,7 +19,7 @@
 #define USB_VENDOR_ID_KINESIS           0x29EA
 #define USB_DEVICE_ID_ADVANTAGE2	0x0102
 
-static __u8 *advantage2_report_fixup(struct hid_device *hdev, __u8 *rdesc,
+static const __u8 *advantage2_report_fixup(struct hid_device *hdev, __u8 *rdesc,
 		unsigned int *rsize)
 {
 	if (*rsize == 0x41 && rdesc[0]==0x05 && rdesc[1] == 0x01 && rdesc[2] == 0x09 && rdesc[3] == 0x06) {
